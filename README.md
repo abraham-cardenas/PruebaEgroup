@@ -33,7 +33,6 @@ y no lo tienes se haria de la siguiente forma
 pip install django
 ```
 
-con esto ya podremos inicializar nuestro pruyecto
 
 ## Librerias django
 
