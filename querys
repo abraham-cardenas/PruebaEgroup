@@ -1,0 +1,25 @@
+/* usuarios con el curso 3 con rol estudiante y su firstaccess sea despues del 10 de mayo del 2021*/
+SELECT course.course_id, user.username, user.firstaccess, rol.name 
+FROM course_rel_user course
+JOIN mdl_user user ON course.userid = user.id
+JOIN mdl_role_assignments assign ON assign.userid = user.id
+JOIN mdl_role rol ON rol.id = assing.roleid 
+WHERE course.course_id = 3
+  AND rol.name = 'estudiante'
+  AND user.firstaccess > '2021-05-10'
+
+/* cuenta todos los usuarios con rol profesor inscritos en el centro comercial de pereira */
+SELECT COUNT(*) as total_profesores
+FROM mdl_user user 
+JOIN course_rel_user rel_user ON  rel_user.userid = user.id
+JOIN mdl_role_assignments assign ON assign.userid = user.id
+JOIN mdl_role rol ON rol.id = assing.roleid 
+JOIN mdl_course course ON rel_user.course_id = course.id 
+JOIN centro_musical centro ON centro.id = course.centro_id 
+JOIN ciudad ciu ON ciu.id = centro.ciudad_id 
+WHERE  rol.name = 'profesor'
+  AND ciu.nombre = 'Pereira' 
+  GROUP BY rol.name, ciu.name
+  
+
+  
